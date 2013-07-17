@@ -6,7 +6,7 @@ use strict;
 use warnings;
 
 use Image::Imlib2;
-use File::Basename;
+use File::Temp qw( tempfile );
 
 # Constructor of this class
 sub new {
@@ -58,20 +58,15 @@ sub rescale_dimensions {
     # Prepare for work...
     my $image = Image::Imlib2->load($image_path);
 
-    # Get details for renaming
-    my @suffixlist = qw( .jpg .jpeg .gif .png );
-    my ($name,$path,$suffix) = fileparse($image_path,@suffixlist);
-
     # determine the size of the image
     my $width = $image->width();
     my $height= $image->height();
 
+    # write in tempfile, so that we don't destroy the original image
+    my ($fh, $outfilename) = tempfile(UNLINK => 1, SUFFIX => '.jpg');
+
     # Only resize the image if it is bigger than max
     if ($width > $self->{max_width} or $height > $self->{max_height}) {
-
-        # We rename the out-file so that we don't destroy the original
-        # picture by overwriting it with the resized version
-        my $outfilename = $path . $name . '-mobi_resized.jpg';
 
         #copy ($image_path, $outfilename);
         $self->_debug(  "Image $image_path is of size $width"."x$height"
@@ -104,9 +99,6 @@ sub rescale_dimensions {
 
         # BUG: Seems like Kindle Reader can't display PNG in my tests...
         # SO I CONVERT EVERYTHING TO JPEG
-        my $outfilename = $path . $name . '-mobi.jpg';
-
-        # Write the file as JPG
         $image->save($outfilename);
 
         # this is so that return returns the right value
