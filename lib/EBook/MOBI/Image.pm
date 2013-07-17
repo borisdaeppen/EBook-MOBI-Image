@@ -144,7 +144,7 @@ The code is meant to be used in object oriented style, so you are asked to creat
 
 According to my own research at the web, it is a good idea to have a maximum size for images of 520 x 622. And this is what this method does, it ensures that this maximum is kept.
 
-Pass a path to an image as the first argument, you will then get back the path of a rescaled image. The image is only rescaled if necessary.
+Pass a path to an image as the first argument, you will then get back the path of a rescaled image. The image is only rescaled if necessary. The image is a temporary copy (to protect the original) and will be deleted after your code exits.
 
 Attention: All pictures, no matter what size will be converted to JPG. In my tests, the Kindle-Reader failed to display PNG, that is why I convert everything - to go safe.
 
@@ -160,7 +160,7 @@ Stop debug messages and erease the reference to the subroutine.
 
 =head1 TODO
 
-A method to 'clean up' and also to change the maximum values would be nice.
+A method to change the maximum values would be nice.
 
 =head1 COPYRIGHT & LICENSE
 
