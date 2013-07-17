@@ -1,6 +1,12 @@
-0.12  2013-07-17
+0.13  2013-07-17
 
     - Use temporary images which get unlinked after ebook creation
+
+0.12  2013-04-09
+
+    - Abort installation if Image::Imlib2 is not installed (dzil)
+      (because of errors at CpanTesters)
+    - Don't pack older builds (dzil)
 
 0.11  2013-01-16
 
