@@ -1,3 +1,7 @@
+0.12  2013-07-17
+
+    - Use temporary images which get unlinked after ebook creation
+
 0.11  2013-01-16
 
     - Fixed bugs discovered by CPAN-Testers
