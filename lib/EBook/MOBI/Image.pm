@@ -126,6 +126,7 @@ If you need to process images in your ebook data, just install this module addit
 
 This example is for developers only.
 Normal users just need to install this module, C<EBook::MOBI> will detect automatically that the module is there and use it.
+See L<EBook::MOBI> for how to actually add images!
 
   use EBook::MOBI::Image;
   my $p = EBook::MOBI::Image->new();
