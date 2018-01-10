@@ -93,13 +93,16 @@ sub rescale_dimensions {
     # If the file is below max width/height we dont to anything
     # NOPE: We do convert to JPG, because PNG fails on Kindle
     else {
-        $self->_debug(
+	    $self->_debug(
           "Image $image_path is of size $width"."x$height - no resizing."
         );
+		
+		# Fix a bug with IMlib2 on MacOS: Not saving if there is no operation the image
+		my $resized = $image->create_scaled_image($width-1, 0);
 
         # BUG: Seems like Kindle Reader can't display PNG in my tests...
         # SO I CONVERT EVERYTHING TO JPEG
-        $image->save($outfilename);
+        $resized->save($outfilename);
 
         # this is so that return returns the right value
         $image_path = $outfilename;
